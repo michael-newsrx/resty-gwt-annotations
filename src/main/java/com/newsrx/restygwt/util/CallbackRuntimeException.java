@@ -19,6 +19,11 @@ public class CallbackRuntimeException extends RuntimeException {
         this.statusText = statusText;
     }
 
+    public static CallbackRuntimeException create(String message, Throwable cause, String text,
+                                                  Map<String, String> headers, int statusCode, String statusText) {
+        return new CallbackRuntimeException(message, cause, text, headers, statusCode, statusText);
+    }
+
     public String getText() {
         return text;
     }

@@ -32,14 +32,10 @@ public class CallbackPromise<T> implements MethodCallback<T> {
         }
         Response response = method.getResponse();
         if (response == null) {
-            reject.onInvoke(exception);
+            reject.onInvoke(new CallbackRuntimeException("", exception, "", Map.of(), -1, ""));
             return;
         }
         String text = response.getText();
-        if (text == null || text.isBlank()) {
-            reject.onInvoke(exception);
-            return;
-        }
         Header[] headers = response.getHeaders();
         Map<String, String> headerMap = new HashMap<>();
         for (Header header : headers) {
@@ -58,5 +54,6 @@ public class CallbackPromise<T> implements MethodCallback<T> {
     public Promise<T> getPromise() {
         return promise;
     }
-
 }
+
+
