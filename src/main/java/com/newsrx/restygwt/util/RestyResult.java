@@ -19,4 +19,12 @@ public class RestyResult<T> {
     public boolean isSuccess() {
         return exception == null;
     }
+
+    /**
+     * Returns a new RestyResult with the given payload,
+     * preserving method, exception, and response.
+     */
+    public <U> RestyResult<U> withPayload(U newPayload) {
+        return new RestyResult<>(this.method, newPayload, this.exception, this.response);
+    }
 }
